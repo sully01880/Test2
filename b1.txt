@@ -2,6 +2,3 @@ gregc
 
 Teodor Change
 Test
-new line
-tests
-edwjdjhefd
