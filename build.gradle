@@ -1,0 +1,86 @@
+
+buildscript {
+	repositories { 
+		maven { url 'http://bel-depman.microfocus.com:8081/artifactory/plugins-release' }
+		maven { url 'http://bel-depman.microfocus.com:8081/artifactory/borland' }
+	}
+	dependencies {
+		classpath "org.jfrog.buildinfo:build-info-extractor-gradle:2.1.0"
+		classpath 'com.borland.gradle:extjs-application-plugin:0.0.13'
+	}
+}
+
+apply plugin: 'artifactory'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'extjs-application'
+
+extjs {
+	workingDir = "WebContent"
+}
+
+dependencies {
+
+}
+
+//Subprojects will add their builds as a dependency to this
+task buildPackages
+buildProduction.dependsOn buildPackages
+buildDev.dependsOn buildPackages
+
+artifactory {
+	contextUrl = 'http://bel-depman.microfocus.com:8081/artifactory'
+	resolve { repository { repoKey = 'repo' } }
+}
+
+allprojects {
+	apply plugin: 'artifactory'
+	artifactory {
+		contextUrl = 'http://bel-depman.microfocus.com:8081/artifactory'
+		resolve { repository { repoKey = 'repo' } }
+		publish {
+			repository {
+				repoKey = 'borland'
+				username = 'playground' //"${artifactory_user}"
+				password = 'playground' //"${artifactory_password}"
+			}
+			
+		}
+	}
+	
+
+	ext {
+		versionNumber = System.getenv("BUILD_NUMBER")
+		versionNumber = versionNumber != null ? versionNumber : 1
+	}
+
+	version = "0.0.0." + versionNumber
+}
+
+
+/* Common set up for all of the ext packages that are built from inside Atlas */
+subprojects {
+	buildscript {
+		repositories { maven { url 'http://bel-depman.microfocus.com:8081/artifactory/plugins-release' }}
+		dependencies {
+			classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:2.1.0'
+			classpath 'com.borland.gradle:extjs-application-plugin:0.0.13'
+		}
+	}
+	
+	apply plugin: 'extjs-package'
+	
+	ext {
+		projectParts = project.name.split("/")
+		//Because the full project name will include the parent path, we want
+		//To use the 'real project name' i.e. the last segment or folder name
+		shortProjectName = projectParts[projectParts.length -1]
+		
+	}
+
+	group = "com.borland.extjs"
+	archivesBaseName = shortProjectName
+	
+	//Packages may depend on external dependencies, retreive them first
+	build.dependsOn parent.extractPackages
+	parent.buildPackages.dependsOn build
+}
