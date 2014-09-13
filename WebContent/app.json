@@ -1,0 +1,71 @@
+{
+    "appCache": {
+        "fallback": [
+            
+        ],
+        "cache": [
+            "index.html"
+        ],
+        "network": [
+            "*"
+        ]
+    },
+    "archivePath": "archive",
+    "bootstrap": {
+        "microloader": "bootstrap.js",
+        "manifest": "bootstrap.json",
+        "base": "${app.dir}",
+        "css": "bootstrap.css"
+    },
+    "classpath": "${app.dir}/app",
+    "compatVersion": "0.0.1",
+    "css": [
+        {
+            "bootstrap": true,
+            "path": "bootstrap.css"
+        }
+    ],
+    "development": {
+        
+    },
+    "framework": "ext",
+    "id": "0f53be31-dbe5-4c1f-a5fa-8852b8e7839c",
+    "indexHtmlPath": "index.html",
+    "js": [
+        {
+            "path": "app.js",
+            "bundle": true
+        }
+    ],
+    "name": "CommonDev",
+    "output": {
+        "base": "${workspace.build.dir}/${build.environment}/${app.name}"
+    },
+    "overrides": "${app.dir}/overrides",
+    "production": {
+        
+    },
+    "requires": [
+        "borlandCommon"
+    ],
+    "resources": [
+        
+    ],
+    "sass": {
+        "namespace": "KitchenSink"
+    },
+    "slicer": {
+        "js": [
+            {
+                "isWidgetManifest": true,
+                "path": "${app.dir}/sass/example/custom.js"
+            }
+        ]
+    },
+    "testing": {
+        
+    },
+    "theme": "ext-theme-neptune",
+    "url": null,
+    "version": "0.0.1"
+}
