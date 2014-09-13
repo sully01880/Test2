@@ -14,7 +14,7 @@
     "bootstrap": {
         "microloader": "bootstrap.js",
         "manifest": "bootstrap.json",
-        "base": "${app.dir}",
+        "base": "${app.dir}",sfas
         "css": "bootstrap.css"
     },
     "classpath": "${app.dir}/app",
