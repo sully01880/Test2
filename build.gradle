@@ -1,4 +1,4 @@
-
+fsafs
 buildscript {
 	repositories { 
 		maven { url 'http://bel-depman.microfocus.com:8081/artifactory/plugins-release' }
