@@ -1,2 +1,3 @@
 "first line" 
 "Line added in branch1" 
+"Second line added in branch1" 
