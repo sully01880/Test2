@@ -1,7 +1,1 @@
-"first line" 
-<<<<<<< HEAD
-"Line added in master" 
-=======
-"Line added in branch1" 
-"Second line added in branch1" 
->>>>>>> branch1
+aaa
