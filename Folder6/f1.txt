@@ -1,7 +1,0 @@
-test1x
-a
-b1
-c
-d
-e1
-f
